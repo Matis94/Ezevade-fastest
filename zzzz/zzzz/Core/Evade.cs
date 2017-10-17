@@ -570,12 +570,7 @@ namespace zzzz
             if (!Situation.ShouldDodge())
                 return;
 
-            var limitDelay = ObjectCache.menuCache.cache["TickLimiter"].As<MenuSlider>(); //Tick limiter                
-            if (EvadeUtils.TickCount - lastTickCount > limitDelay.Value)
-            {
-                args.ProcessEvent = false;
-                return;
-            }
+
 
 
             //if (args.OrderType == OrderType.MoveTo)
@@ -592,6 +587,14 @@ namespace zzzz
             {
                 if (isDodging && SpellDetector.spells.Any())
                 {
+                    var limitDelay = ObjectCache.menuCache.cache["TickLimiter"].As<MenuSlider>(); //Tick limiter                
+                    if (EvadeUtils.TickCount - lastTickCount < limitDelay.Value)
+                    {
+                        lastTickCount = EvadeUtils.TickCount;
+                        args.ProcessEvent = false;
+                        return;
+                    }
+
                     CheckHeroInDanger();
 
                     lastBlockedUserMoveTo = new EvadeCommand
@@ -619,9 +622,7 @@ namespace zzzz
                                 .As<MenuSlider>().Value + 30;
                             var extraDist = ObjectCache.menuCache.cache["ExtraCPADistance"]
                                 .As<MenuSlider>().Value + 10;
-
                             var tPosInfo = EvadeHelper.CanHeroWalkToPos(movePos, ObjectCache.myHeroCache.moveSpeed, extraDelayBuffer + ObjectCache.gamePing, extraDist);
-
                             if (tPosInfo.posDangerLevel == 0)
                             {
                                 lastPosInfo = tPosInfo;
