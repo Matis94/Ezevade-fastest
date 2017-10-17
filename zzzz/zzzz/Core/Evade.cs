@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections.Specialized;
+using System;
 using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Extensions;
@@ -571,7 +570,12 @@ namespace zzzz
             if (!Situation.ShouldDodge())
                 return;
 
-
+            var limitDelay = ObjectCache.menuCache.cache["TickLimiter"].As<MenuSlider>(); //Tick limiter                
+            if (EvadeUtils.TickCount - lastTickCount > limitDelay.Value)
+            {
+                args.ProcessEvent = false;
+                return;
+            }
 
 
             //if (args.OrderType == OrderType.MoveTo)
@@ -588,14 +592,6 @@ namespace zzzz
             {
                 if (isDodging && SpellDetector.spells.Any())
                 {
-                    var limitDelay = ObjectCache.menuCache.cache["TickLimiter"].As<MenuSlider>(); //Tick limiter                
-                    if (EvadeUtils.TickCount - lastTickCount < limitDelay.Value)
-                    {
-                        lastTickCount = EvadeUtils.TickCount;
-                        args.ProcessEvent = false;
-                        return;
-                    }
-
                     CheckHeroInDanger();
 
                     lastBlockedUserMoveTo = new EvadeCommand
@@ -606,37 +602,9 @@ namespace zzzz
                         timestamp = EvadeUtils.TickCount,
                         isProcessed = false
                     };
+                    //args.ProcessEvent = true;
 
-                    //var extraDelay = ObjectCache.menuCache.cache["ExtraPingBuffer"].As<MenuSlider>().Value;
-                    //if (EvadeHelper.CheckMovePath(args.Position.To2D(), extraDelay))
-                    //{
-                    //    foreach (var entry in SpellDetector.spells)
-                    //    {
-                    //        var spell = entry.Value;
-
-                    //        if (args.Position.To2D().InSkillShot(spell, spell.radius))
-                    //        {
-                    //            args.ProcessEvent = false;
-                    //            return;
-                    //        }
-
-                    //        args.ProcessEvent = true;
-                    //        return;
-                    //    }
-
-                    //}
-                    var posInfoTest =
-                        EvadeHelper.CanHeroWalkToPos(args.Position.To2D(), ObjectCache.myHeroCache.moveSpeed, 0, 0, false);
-
-                    if (posInfoTest.isDangerousPos)
-                    {
-                        args.ProcessEvent = false;
-                    }
-                    else
-                    {
-                        lastPosInfo.position = args.Position.To2D();
-                        args.ProcessEvent = true;
-                    }
+                    args.ProcessEvent = false;
                 }
                 else
                 {
@@ -645,6 +613,22 @@ namespace zzzz
 
                     if (EvadeHelper.CheckMovePath(movePos, ObjectCache.gamePing + extraDelay))
                     {
+                        /*if (ObjectCache.menuCache.cache["AllowCrossing"].As<MenuBool>().Enabled)
+                        {
+                            var extraDelayBuffer = ObjectCache.menuCache.cache["ExtraPingBuffer"]
+                                .As<MenuSlider>().Value + 30;
+                            var extraDist = ObjectCache.menuCache.cache["ExtraCPADistance"]
+                                .As<MenuSlider>().Value + 10;
+
+                            var tPosInfo = EvadeHelper.CanHeroWalkToPos(movePos, ObjectCache.myHeroCache.moveSpeed, extraDelayBuffer + ObjectCache.gamePing, extraDist);
+
+                            if (tPosInfo.posDangerLevel == 0)
+                            {
+                                lastPosInfo = tPosInfo;
+                                return;
+                            }
+                        }*/
+
                         lastBlockedUserMoveTo = new EvadeCommand
                         {
                             order = EvadeOrderCommand.MoveTo,
@@ -919,11 +903,11 @@ namespace zzzz
 
                     var lastBestPosition = lastPosInfo.position;
 
-                    if (ObjectCache.menuCache.cache["ClickOnlyOnce"].As<MenuBool>().Value
+                    if (ObjectCache.menuCache.cache["ClickOnlyOnce"].As<MenuBool>().Value == false
                         || !(myHero.Path.Count() > 0 && lastPosInfo.position.Distance(myHero.Path.Last().To2D()) < 5))
                         //|| lastPosInfo.timestamp > lastEvadeOrderTime)
-                        
                     {
+                        // Console.WriteLine("DodgeSkillshots");
                         EvadeCommand.MoveTo(lastBestPosition);
                         lastEvadeOrderTime = EvadeUtils.TickCount;
                     }
@@ -931,45 +915,6 @@ namespace zzzz
             }
             else //if not dodging
             {
-            ////////    //Check if hero will walk into a skillshot
-            ////////    var path = myHero.Path;
-            ////////    //if (path == null)
-            ////////    //    return;
-
-            ////////    var path2 = myHero.GetPath(myHero.ServerPosition, Game.CursorPos);
-
-            ////////    //if (path.Length > 0)
-            ////////    //{
-            ////////    var movePos = path2[path2.Length - 1].To2D();//path[path.Length - 1].To2D();
-
-            ////////        if (EvadeHelper.CheckMovePath(movePos))
-            ////////        {
-            ////////            /*if (ObjectCache.menuCache.cache["AllowCrossing"].As<MenuBool>().Enabled)
-            ////////            {
-            ////////                var extraDelayBuffer = ObjectCache.menuCache.cache["ExtraPingBuffer"]
-            ////////                    .As<MenuSlider>().Value + 30;
-            ////////                var extraDist = ObjectCache.menuCache.cache["ExtraCPADistance"]
-            ////////                    .As<MenuSlider>().Value + 10;
-
-            ////////                var tPosInfo = EvadeHelper.CanHeroWalkToPos(movePos, ObjectCache.myHeroCache.moveSpeed, extraDelayBuffer + ObjectCache.gamePing, extraDist);
-
-            ////////                if (tPosInfo.posDangerLevel == 0)
-            ////////                {
-            ////////                    lastPosInfo = tPosInfo;
-            ////////                    return;
-            ////////                }
-            ////////            }*/
-
-            ////////            var posInfo = EvadeHelper.GetBestPositionMovementBlock(movePos);
-            ////////            if (posInfo != null)
-            ////////                EvadeCommand.MoveTo(posInfo.position);
-
-            ////////            Console.WriteLine("will walk into skillshot nigga");
-            ////////        }
-            ////////    //}
-            ////////}
-
-
                 //Check if hero will walk into a skillshot
                 var path = myHero.Path;
                 //if (path == null)
@@ -1000,7 +945,6 @@ namespace zzzz
                         var posInfo = EvadeHelper.GetBestPositionMovementBlock(movePos);
                         if (posInfo != null)
                             EvadeCommand.MoveTo(posInfo.position);
-
                     }
                 }
             }
