@@ -1,6 +1,5 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
-using System.Collections.Specialized;
 using System.Linq;
 using Aimtec;
 using Aimtec.SDK.Events;
@@ -1135,9 +1134,18 @@ namespace zzzz
                 startPoint = dashItem.EndPos.To3D();
             }
 
-           
+            // fix 
+            //var poopy = myHero.Path; //from serverpos
             var poopy = myHero.GetPath(startPoint, movePos.To3D()); //from serverpos
+            // var poopy = new Vector3[(int)movePos.Length + 1];
 
+            //for (int i = 1; i < movePos.Length / 10; i++)
+            //{
+            // poopy[i] = startPoint.Extend(movePos.To3D(), i * 10);
+            //}
+
+
+            //var poopyz = new Vector3[]{startPoint, startPoint.Extend(movePos.To3D(), 10)};
 
             var lastPoint = new Vector2();
 
@@ -1198,9 +1206,7 @@ namespace zzzz
                     if (spell.spellType == SpellType.Line)
                     {
                         if (spell.LineIntersectLinearSpell(from, movePos))
-                        {
                             return true;
-                        }
                     }
                     else if (spell.spellType == SpellType.Circular)
                     {
@@ -1267,11 +1273,6 @@ namespace zzzz
                             LineIntersectLinearSegment(spell.cnRight, spell.cnStart, from, movePos))
                             return true;
                     }
-                }
-                else if (from.InSkillShot(spell, ObjectCache.myHeroCache.boundingRadius))
-                {
-                    if (movePos.InSkillShot(spell, ObjectCache.myHeroCache.boundingRadius))
-                        return true;
                 }
             }
 
