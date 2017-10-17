@@ -1,0 +1,11 @@
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\zzzz.exe.config
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\zzzz.exe
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\zzzz.pdb
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\Aimtec.dll
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\Aimtec.SDK.dll
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\NLog.dll
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\bin\Debug\Newtonsoft.Json.dll
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\obj\Debug\zzzz.csprojResolveAssemblyReference.cache
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\obj\Debug\zzzz.csproj.CoreCompileInputs.cache
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\obj\Debug\zzzz.exe
+C:\Users\matis\Desktop\Aimtec-master\Aimtec-master\zzzz\zzzz\obj\Debug\zzzz.pdb
