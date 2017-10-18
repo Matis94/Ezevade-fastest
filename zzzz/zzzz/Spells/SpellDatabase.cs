@@ -4262,7 +4262,7 @@ namespace zzzz
                     name = "kaynq",
                     projectileSpeed = 500,
                     radius = 300,
-                    range = 450,
+                    range = 400,
                     spellDelay = 250,
                     spellKey = SpellSlot.Q,
                     spellName = "KaynQ",
