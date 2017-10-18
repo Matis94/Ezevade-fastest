@@ -426,7 +426,7 @@ namespace zzzz
                     dangerlevel = 3,
                     missileName = "BrandQMissile",
                     name = "Sear",
-                    projectileSpeed = 2000, //1600
+                    projectileSpeed = 1600, //2000
                     radius = 60,
                     range = 1100,
                     spellDelay = 250,
@@ -897,13 +897,31 @@ namespace zzzz
                 {
                     charName = "Evelynn",
                     dangerlevel = 4,
+		    missileName = "EvelynnRTrail",
                     name = "Agony's Embrace",
-                    radius = 350,
-                    range = 650,
-                    spellDelay = 250,
+		    projectileSpeed = 4194,
+                    radius = 450,
+                    range = 600,
+                    spellDelay = 0,
                     spellKey = SpellSlot.R,
                     spellName = "EvelynnR",
-                    spellType = SpellType.Circular
+                    spellType = SpellType.Line
+                });
+				
+            Spells.Add(
+                new SpellData
+                {
+                    charName = "Evelynn",
+                    dangerlevel = 3,
+		    missileName = "EvelynnQDebuffCircleMissile",
+                    name = "EvelynnQ",
+		    projectileSpeed = 2400,
+                    radius = 60,
+                    range = 950,
+                    spellDelay = 250,
+                    spellKey = SpellSlot.Q,
+                    spellName = "EvelynnQ",
+                    spellType = SpellType.Line
                 });
 
             #endregion Evelynn
@@ -1323,9 +1341,9 @@ namespace zzzz
                     dangerlevel = 4,
                     missileName = "GravesChargeShotFxMissile",
                     name = "Collateral Damage (Explosion)",
-                    projectileSpeed = 2000,
-                    radius = 100,
-                    range = 1000,
+                    projectileSpeed = 2115,
+                    radius = 150,
+                    range = 1100,
                     spellDelay = 250,
                     spellKey = SpellSlot.R,
                     spellName = "GravesChargeShotFxMissile",
@@ -1370,7 +1388,7 @@ namespace zzzz
                 {
                     charName = "Heimerdinger",
                     dangerlevel = 2,
-                    missileName = "HeimerdingerWAttack2",
+                    missileName = "HeimerdingerW",
                     extraMissileNames = new[] {"HeimerdingerWAttack2Ult"},
                     name = "Hextech Micro-Rockets",
                     projectileSpeed = 1800,
@@ -1396,7 +1414,7 @@ namespace zzzz
                     spellKey = SpellSlot.E,
                     spellName = "HeimerdingerE",
                     extraMissileNames = new[]
-                        {"heimerdingerespell_ult", "heimerdingerespell_ult2", "heimerdingerespell_ult3"},
+                        {"HeimerdingerESpell_ult", "HeimerdingerESpell_ult2", "HeimerdingerESpell_ult3"},
                     spellType = SpellType.Circular
                 });
 
@@ -1650,7 +1668,7 @@ namespace zzzz
                     spellName = "jayceshockblastwallmis",
                     spellType = SpellType.Line,
                     collisionObjects = new[] {CollisionObjectType.EnemyChampions, CollisionObjectType.EnemyMinions},
-                    secondaryRadius = 210,
+                    secondaryRadius = 250,
                     fixedRange = true
                 });
 
@@ -1814,8 +1832,8 @@ namespace zzzz
                     spellName = "KarmaQMissileMantra",
                     spellType = SpellType.Line,
                     collisionObjects = new[] {CollisionObjectType.EnemyChampions, CollisionObjectType.EnemyMinions},
-                    //hasEndExplosion = true,
-                    secondaryRadius = 250
+                    hasEndExplosion = true,
+                    secondaryRadius = 310
                 });
 
             #endregion Karma
@@ -2137,23 +2155,23 @@ namespace zzzz
                 });
 
             //TODO: Add LeeSin R?
-            //Spells.Add(
-            //new SpellData
-            //{
-            //    charName = "LeeSin",
-            //    dangerlevel = 3,
-            //    missileName = "",
-            //    name = "Dragon's Rage",
-            //    projectileSpeed = 1000,
-            //    radius = 0,
-            //    range = 850,
-            //    spellDelay = 250,
-            //    spellKey = SpellSlot.R,
-            //    isSpecial = true,
-            //    spellName = "blindmonkrkick",
-            //    spellType = SpellType.Line,
-            //    noProcess = true
-            //});
+            /*Spells.Add(
+            new SpellData
+            {
+                   charName = "LeeSin",
+                   dangerlevel = 3,
+                   missileName = "BlindMonkRKick",
+                   name = "Dragon's Rage",
+                   projectileSpeed = 1000,
+                   radius = 50,
+                   range = 850,
+                   spellDelay = 250,
+                   spellKey = SpellSlot.R,
+                   isSpecial = true,
+                   spellName = "BlindMonkRKick",
+                   spellType = SpellType.Line,
+                   noProcess = true
+            });*/
 
             #endregion LeeSin
 
@@ -2732,11 +2750,11 @@ namespace zzzz
                     projectileSpeed = 1400,
                     radius = 85,
                     secondaryRadius = 145,
-                    range = 1650,
+                    range = 1500,
                     spellDelay = 0,
                     spellKey = SpellSlot.Q,
                     useEndPosition = true,
-                    //hasEndExplosion = true,
+                    hasEndExplosion = true,
                     spellName = "OrianaIzunaCommand",
                     spellType = SpellType.Line,
                     isSpecial = true
@@ -3054,13 +3072,28 @@ namespace zzzz
                 {
                     charName = "Sejuani",
                     dangerlevel = 3,
-                    name = "Arctic Assault",
+                    name = "SejuaniW",
                     projectileSpeed = 1250,
                     radius = 75,
-                    range = 850,
-                    spellDelay = 0,
+                    range = 700,
+                    spellDelay = 250,
+                    spellKey = SpellSlot.W,
+                    spellName = "SejuaniW",
+                    spellType = SpellType.Line
+                });
+				
+            Spells.Add(
+                new SpellData
+                {
+                    charName = "Sejuani",
+                    dangerlevel = 3,
+                    name = "SejuaniQ",
+                    projectileSpeed = 1500,
+                    radius = 100,
+                    range = 800,
+                    spellDelay = 250,
                     spellKey = SpellSlot.Q,
-                    spellName = "SejuaniArcticAssault",
+                    spellName = "SejuaniQ",
                     spellType = SpellType.Line
                 });
 
@@ -3069,11 +3102,11 @@ namespace zzzz
                 {
                     charName = "Sejuani",
                     dangerlevel = 4,
-                    missileName = "SejuaniGlacialPrison",
+                    missileName = "SejuaniRMissile",
                     name = "Glacial Prison",
                     projectileSpeed = 1600,
-                    radius = 110,
-                    range = 1200,
+                    radius = 120,
+                    range = 1300,
                     spellDelay = 250,
                     hasEndExplosion = true,
                     secondaryRadius = 350,
@@ -3164,7 +3197,6 @@ namespace zzzz
 
             #region Sion
 
-            //TODO: Sion Q, special code?
 
             Spells.Add(
                 new SpellData
@@ -3183,24 +3215,42 @@ namespace zzzz
                     isSpecial = true,
                     fixedRange = true
                 });
+				
+			Spells.Add(
+                new SpellData
+                {
+                    charName = "Sion",
+                    dangerlevel = 3,
+                    missileName = "SionQ",
+                    name = "SionQ", //TODO special code for Q
+                    projectileSpeed = 1500,
+                    radius = 200,
+                    range = 850,
+                    spellDelay = 503,
+                    spellKey = SpellSlot.Q,
+                    spellName = "SionQ",
+                    spellType = SpellType.Line,
+                    isSpecial = true,
+                    fixedRange = true
+                });
 
-            Spells.Add(
+            /*Spells.Add(
                 new SpellData
                 {
                     charName = "Sion",
                     dangerlevel = 3,
                     missileName = "SionR",
                     name = "Unstoppable Onslaught",
-                    projectileSpeed = 1000,
+                    projectileSpeed = 1500,
                     radius = 120,
                     range = 300,
                     spellDelay = 500,
                     spellKey = SpellSlot.R,
                     spellName = "SionR",
-                    spellType = SpellType.None, // temp removal
+                    spellType = SpellType.Line, // temp removal
                     collisionObjects = new[] {CollisionObjectType.EnemyChampions},
                     isSpecial = true
-                });
+                }); */
 
             #endregion Sion
 
@@ -3401,7 +3451,7 @@ namespace zzzz
 
             #region Talon
 
-            Spells.Add(
+           /* Spells.Add(
                 new SpellData
                 {
                     charName = "Talon",
@@ -3415,7 +3465,7 @@ namespace zzzz
                     extraMissileNames = new[] {"talonrmistwo"},
                     spellType = SpellType.Line,
                     fixedRange = true
-                });
+                }); */
 
             Spells.Add(
                 new SpellData
@@ -4202,6 +4252,22 @@ namespace zzzz
                     spellName = "kaynw",
                     spellType = SpellType.Line
                 });
+				
+            Spells.Add(
+                new SpellData
+                {
+                    charName = "Kayn",
+                    dangerlevel = 3,
+                    missileName = "KaynQ",
+                    name = "kaynq",
+                    projectileSpeed = 500,
+                    radius = 300,
+                    range = 450,
+                    spellDelay = 250,
+                    spellKey = SpellSlot.Q,
+                    spellName = "KaynQ",
+                    spellType = SpellType.Circular
+                });
 
             #endregion Kayn
 			
@@ -4221,6 +4287,22 @@ namespace zzzz
                     spellKey = SpellSlot.Q,
                     spellName = "RakanQ",
                     spellType = SpellType.Line
+                });
+				
+            Spells.Add(
+                new SpellData
+                {
+                    charName = "Rakan",
+                    dangerlevel = 3,
+                    missileName = "RakanWCast",
+                    name = "RakanW",
+                    projectileSpeed = 2050,
+                    radius = 180,
+                    range = 600,
+                    spellDelay = 250,
+                    spellKey = SpellSlot.W,
+                    spellName = "RakanW",
+                    spellType = SpellType.Circular
                 });
 
             #endregion Rakan
