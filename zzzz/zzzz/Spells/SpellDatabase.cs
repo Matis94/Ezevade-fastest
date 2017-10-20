@@ -1658,7 +1658,7 @@ namespace zzzz
                 {
                     charName = "Jayce",
                     dangerlevel = 3,
-                    name = "Shock Blast Fast",
+                    name = "JayceShockBlastWallMis",
                     projectileSpeed = 2350,
                     radius = 70,
                     range = 1600,
