@@ -3747,7 +3747,7 @@ namespace zzzz
                     dangerlevel = 3,
                     missileName = "urgotr",
                     name = "urgotr",
-                    projectileSpeed = 2150,
+                    projectileSpeed = 3200,
                     radius = 80,
                     range = 1600,
                     spellDelay = 283,
